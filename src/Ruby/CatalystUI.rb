@@ -283,15 +283,6 @@ class CatalystUI
                 sleep 3600
             }
         }
-        Thread.new {
-            loop {
-                sleep 30
-                if ProgrammableBooleans::trueNoMoreOftenThanEveryNSeconds("f5f52127-c140-4c59-85a2-8242b546fe1f", 3600) then
-                    system("#{File.dirname(__FILE__)}/../../bin/vienna-import")
-                end
-                sleep 3600
-            }
-        }
         @@haveStartedThreads = true
     end
 
