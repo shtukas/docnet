@@ -99,43 +99,6 @@ class DataPortalUI
             puts ""
 
             ms.item(
-                "Asteroids",
-                lambda { Asteroids::main() }
-            )
-
-            ms.item(
-                "asteroid (new)",
-                lambda { 
-                    asteroid = Asteroids::issueAsteroidInteractivelyOrNull()
-                    return if asteroid.nil?
-                    puts JSON.pretty_generate(asteroid)
-                    LucilleCore::pressEnterToContinue()
-                }
-            )
-
-            ms.item(
-                "asteroid floats open-project-in-the-background", 
-                lambda { 
-                    loop {
-                        system("clear")
-                        menuitems = LCoreMenuItemsNX1.new()
-                        Asteroids::asteroids()
-                            .select{|asteroid| asteroid["orbital"]["type"] == "open-project-in-the-background-b458aa91-6e1" }
-                            .each{|asteroid|
-                                menuitems.item(
-                                    Asteroids::asteroidToString(asteroid),
-                                    lambda { Asteroids::landing(asteroid) }
-                                )
-                            }
-                        status = menuitems.prompt()
-                        break if !status
-                    }
-                }
-            )
-
-            puts ""
-
-            ms.item(
                 "Calendar",
                 lambda { 
                     system("open '#{Miscellaneous::catalystDataCenterFolderpath()}/Calendar/Items'") 

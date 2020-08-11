@@ -80,38 +80,10 @@ class CatalystUI
                 verticalSpaceLeft = verticalSpaceLeft - 1
             end
 
-            Asteroids::asteroids()
-                .select{|asteroid|
-                    asteroid["orbital"]["type"] == "repeating-daily-time-commitment-8123956c-05"
-                }
-                .sort{|a1, a2| a1["unixtime"] <=> a2["unixtime"] }
-                .each{|asteroid|
-                    next if verticalSpaceLeft <= 0
-                    menuitems.item(
-                        Asteroids::asteroidToString(asteroid),
-                        lambda { Asteroids::landing(asteroid) }
-                    )
-                    verticalSpaceLeft = verticalSpaceLeft - 1
-                }
-
             if verticalSpaceLeft >= 1 then
                 puts ""
                 verticalSpaceLeft = verticalSpaceLeft - 1
             end
-
-            Asteroids::asteroids()
-                .select{|asteroid|
-                    asteroid["orbital"]["type"] == "on-going-until-completion-5b26f145-7ebf-498"
-                }
-                .sort{|a1, a2| a1["unixtime"] <=> a2["unixtime"] }
-                .each{|asteroid|
-                    next if verticalSpaceLeft <= 0
-                    menuitems.item(
-                        Asteroids::asteroidToString(asteroid),
-                        lambda { Asteroids::landing(asteroid) }
-                    )
-                    verticalSpaceLeft = verticalSpaceLeft - 1
-                }
 
             if verticalSpaceLeft >= 1 then
                 puts ""
@@ -134,20 +106,6 @@ class CatalystUI
                 puts ""
                 verticalSpaceLeft = verticalSpaceLeft - 1
             end
-
-            Asteroids::asteroids()
-                .select{|asteroid|
-                    asteroid["orbital"]["type"] == "open-project-in-the-background-b458aa91-6e1"
-                }
-                .sort{|a1, a2| a1["unixtime"] <=> a2["unixtime"] }
-                .each{|asteroid|
-                    next if verticalSpaceLeft <= 0
-                    menuitems.item(
-                        Asteroids::asteroidToString(asteroid),
-                        lambda { Asteroids::landing(asteroid) }
-                    )
-                    verticalSpaceLeft = verticalSpaceLeft - 1
-                }
 
             if verticalSpaceLeft >= 1 then
                 puts ""
@@ -226,20 +184,6 @@ class CatalystUI
             return
         end
 
-        if command == "l+" then
-            ms = LCoreMenuItemsNX1.new()
-            ms.item(
-                "asteroid",
-                lambda { Asteroids::issueAsteroidInteractivelyOrNull() }
-            )
-            ms.item(
-                "wave",
-                lambda { Waves::issueNewWaveInteractivelyOrNull() }
-            )
-            ms.prompt()
-            return
-        end
-
         if command == "/" then
             DataPortalUI::dataPortalFront()
             return
@@ -256,33 +200,6 @@ class CatalystUI
     def self.startThreadsIfNotStarted()
         return if @@haveStartedThreads
         puts "-> starting Threads"
-        Thread.new {
-            loop {
-                sleep 10
-                CatalystObjectsOperator::getCatalystListingObjectsOrdered()
-                    .select{|object| object["isRunningForLong"] }
-                    .first(1)
-                    .each{|object|
-                        Miscellaneous::onScreenNotification("Catalyst Interface", "An object is running for long")
-                    }
-                sleep 120
-            }
-        }
-        Thread.new {
-            loop {
-                sleep 20
-                if ProgrammableBooleans::trueNoMoreOftenThanEveryNSeconds("4b5acaf4-00da-4b81-92c2-9ca6ef0c7c4a", 3600) then
-                    Asteroids::asteroids()
-                        .map{|asteroid| Asteroids::asteroidToCalalystObject(asteroid) }
-                        .select{|object| DoNotShowUntil::isVisible(object["uuid"]) }
-                        .sort{|o1, o2| o1["metric"]<=>o2["metric"] }
-                        .reverse
-                        .first(50)
-                        .each{|object| AsteroidsOfInterest::register(object["uuid"]) }
-                end
-                sleep 3600
-            }
-        }
         @@haveStartedThreads = true
     end
 

@@ -37,7 +37,6 @@ require 'curses'
 require_relative "AionCore.rb"
 require_relative "Anniversaries.rb"
 require_relative "Arrows.rb"
-require_relative "Asteroids.rb"
 require_relative "AtlasCore.rb"
 
 require_relative "BackupsMonitor.rb"

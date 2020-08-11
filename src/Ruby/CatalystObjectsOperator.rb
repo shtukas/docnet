@@ -7,7 +7,6 @@ class CatalystObjectsOperator
     def self.getCatalystListingObjectsOrdered()
         objects = [
             Anniversaries::catalystObjects(),
-            Asteroids::catalystObjects(),
             BackupsMonitor::catalystObjects(),
             Calendar::catalystObjects(),
             VideoStream::catalystObjects(),
@@ -35,10 +34,6 @@ class CatalystObjectsOperator
             {
                 "name" => "Calendar",
                 "exec" => lambda{ Calendar::catalystObjects() }
-            },
-            {
-                "name" => "Asteroids",
-                "exec" => lambda{ Asteroids::catalystObjects() }
             },
             {
                 "name" => "VideoStream",

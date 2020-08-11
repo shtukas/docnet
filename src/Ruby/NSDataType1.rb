@@ -142,15 +142,6 @@ class NSDataType1
 
             Miscellaneous::horizontalRule()
 
-            if Miscellaneous::isAlexandra() then
-                NSDataType1::getAsteroidsForNode(node).each{|asteroid|
-                    menuitems.item(
-                        "parent: #{Asteroids::asteroidToString(asteroid)}",
-                        lambda { Asteroids::landing(asteroid) }
-                    )
-                }
-            end
-
             upstream = NSDataType1::getUpstreamNodes(node)
             upstream = NSDataType1::applyDateTimeOrderToType1s(upstream)
             upstream.each{|o|
@@ -391,11 +382,6 @@ class NSDataType1
             break if !status
 
         }
-    end
-
-    # NSDataType1::getAsteroidsForNode(point)
-    def self.getAsteroidsForNode(point)
-        Arrows::getSourcesOfGivenSetsForTarget(point, ["b66318f4-2662-4621-a991-a6b966fb4398"])
     end
 
     # NSDataType1::getUpstreamNodes(object)

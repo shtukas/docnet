@@ -215,28 +215,6 @@ class Miscellaneous
 
     # Miscellaneous::importFromLucilleInbox()
     def self.importFromLucilleInbox()
-        getNextLocationAtTheInboxOrNull = lambda {
-            Dir.entries("/Users/pascal/Desktop/Todo-Inbox")
-                .reject{|filename| filename[0, 1] == '.' }
-                .map{|filename| "/Users/pascal/Desktop/Todo-Inbox/#{filename}" }
-                .first
-        }
-        while (location = getNextLocationAtTheInboxOrNull.call()) do
-            if File.basename(location).include?("'") then
-                basename2 = File.basename(location).gsub("'", "-")
-                location2 = "#{File.dirname(location)}/#{basename2}"
-                FileUtils.mv(location, location2)
-                next
-            end
-
-            namedhash = LibrarianOperator::commitLocationDataAndReturnNamedHash(location)
-            datapoint = NSDataPoint::issueAionPoint(namedhash)
-            dataline = NSDataLine::issue()
-            Arrows::issueOrException(dataline, datapoint)
-            asteroid = Asteroids::issueAsteroidInboxFromDataline(dataline)
-            puts JSON.pretty_generate(asteroid)
-            LucilleCore::removeFileSystemLocation(location)
-        end
     end
 
     # Miscellaneous::isAlexandra()
