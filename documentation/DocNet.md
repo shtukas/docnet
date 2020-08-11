@@ -1,6 +1,4 @@
-## DocNet
-
-This is the home page of the DocNet end user documentation.
+Welcome to **DocNet** (Multi-user **Doc**umentation **Net**work) 🙂
 
 DocNet is a multi-user distributed documentation framework, built for the Guardian engineering department. DocNet became an active project mid 2020 and is a work in progress.
 
@@ -14,7 +12,6 @@ In this documentation:
 DocNet...
 
 - Was born as a terminal application (a purposeful choice by its author, Pascal), but will acquire other user interfaces as time goes on. 
-- Is written in Ruby (because the program it is a subset of, Catalyst, is written in Ruby). But note that Catalyst (and therefore DocNet) is going to be rewritten in Go.
 - Has an interesting data model. The reader is invited to get familiar with it to better understand the user interface. See [DocNet Datamodel](DocNetDatamodel.md).
 - Makes no assumption about the documentation files. Text, pictures, .md files, Word documents, anything goes... So you do not need to convert your existing files to anything. Also, if you already have documentation written in Google Docs, just link to that, in this case DocNet acts as an index.
 
@@ -52,3 +49,19 @@ Note that DocNet will store its data here: `~/.docnet`.
 - [DocNet Search and Navigation](DocNetSearchAndNavigation.md) To learn how to navigate the knowledge graph 💡
 - [DocNet Nodes](DocNetNodes.md) To learn how to view, edit and create new nodes and become an awesome contributor of the knowledge network 👏
 - [Doc Network](DocNetwork.md) To discover how DocNet performs communication between users 🛰
+
+### Q & A
+
+**Q: What is the latest in terms of roadmap ?** 👩‍💻
+
+- August 2020. DocNet has just been forked out of Catalyst (inside which it was born). There is still a bit of work put into finalising its data model. 
+- DocNet is currently written in Ruby (because Catalyst is written in Ruby) but is going to be re-written in Go by the end of 2020.
+- DocNet features that may appear in the future include, but are not limited to:
+    - Enablying end to end encryption between users.
+    - Possibly user credentials management. 
+    - Possibly some sort of a web interface (for better knowledge graph visualisation).
+
+**Q: How can I help ?** 
+
+- So... right now (Summer 2020), contributing to the code would not be that helpful. One priceless way you can help would be to use it, mostly by starting collecting documentation in it (and sharing that with the rest of the current test users). 📚
+- DocNet will ultimately have some sort of a web interface (some things are better expressed on a Graphical UI), even though it will also always have a fully functioning and arguably more feature rich command line interface. If somebody wants to think about that (or start doing something). Do let me know :)
