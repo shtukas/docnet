@@ -1,0 +1,62 @@
+
+Asteroid
+{
+    "uuid"     : String
+    "nyxNxSet" : "b66318f4-2662-4621-a991-a6b966fb4398"
+    "unixtime" : Float # Unixtime with decimals
+    "payload"  : Payload
+    "orbital"  : Orbital
+}
+
+    Payload
+        {
+            "type"        : "description"
+            "description" : String
+        }
+        {
+            "type"         : "metal"
+            "description"  : null or String
+        }
+        {
+            "type"         : "direct-management-5d44d340-1449-43ff-9864-e1f0526f1e26"
+            "description"  : null or String
+        }
+
+    Orbital
+
+        {
+            "type"                  : "top-priority-ca7a15a8-42fa-4dd7-be72-5bfed3"
+            "ordinal"               : Float
+        }
+        {
+            "type"                  : "inbox-cb1e2cb7-4264-4c66-acef-687846e4ff860"
+        }
+        {
+            "type"                  : "singleton-time-commitment-7c67cb4f-77e0-4fd"
+            "timeCommitmentInHours" : Float
+        }
+        {
+            "type"                  : "repeating-daily-time-commitment-8123956c-05"
+            "timeCommitmentInHours" : Float
+            "days"                  : nil or Array[String] 
+                                      Week days that we are "on" (was introduced for Guardian Work)
+        }
+        {
+            "type"                  : "on-going-until-completion-5b26f145-7ebf-498"
+            "doneForDay"            : nil or Date
+        }
+        {
+            "type"                  : "indefinite-e79bb5c2-9046-4b86-8a79-eb7dc9e2"
+            "doneForDay"            : nil or Date
+        }
+        {
+            "type"                  : "float-to-do-today-b0d902a8-3184-45fa-9808-1"
+        }
+        {
+            "type"                  : "open-project-in-the-background-b458aa91-6e1"
+        }
+        {
+            "type"                  : "queued-8cb9c7bd-cb9a-42a5-8130-4c7c5463173c"
+        }
+
+

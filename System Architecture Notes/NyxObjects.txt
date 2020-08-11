@@ -1,0 +1,34 @@
+
+Nyx
+
+    Data
+
+        NSDataPoint   # NSDataPoint.txt
+                      # nyxNxSet: "ae95948f-57ad-46c2-9871-69d5e7e50481"
+
+        NSDataType1   # NSDataType1.txt
+                      # nyxNxSet: "c18e8093-63d6-4072-8827-14f238975d04"
+
+        Wave          # Waves.txt
+                      # nyxNxSet: "7deb0315-98b5-4e4d-9ad2-d83c2f62e6d4"
+
+        Asteroid      # Asteroid.txt
+                      # nyxNxSet: "b66318f4-2662-4621-a991-a6b966fb4398"
+
+        Page          # Page.txt
+                      # nyxNxSet: "ab01a47c-bb91-4a15-93f5-b98cd3eb1866"
+
+    Arrow # Arrows.txt
+          # nyxNxSet: "d83a3ff5-023e-482c-8658-f7cfdbb6b738"
+
+    NSDataTypeX
+
+
+All Nyx Objects 
+
+    1. Need to have the two following attributes
+
+        - uuid                : String
+        - nyxNxSet            : String
+
+    2. The nyxNxSet need to be a valid setid.
