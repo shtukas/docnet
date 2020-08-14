@@ -7,7 +7,6 @@ class GeneralSearch
     def self.searchNx1630(pattern)
         [
             NSDataType1::searchNx1630(pattern),
-            Waves::searchNx1630(pattern),
         ]
             .flatten
             .sort{|i1, i2| i1["referencetime"] <=> i2["referencetime"] }

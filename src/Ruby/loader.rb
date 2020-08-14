@@ -55,8 +55,6 @@ require_relative "BTreeSets.rb"
 =end
 
 require_relative "Calendar.rb"
-require_relative "CatalystObjectsOperator.rb"
-require_relative "CatalystUI.rb"
 
 require_relative "Curation.rb"
 
@@ -66,9 +64,7 @@ require_relative "DataStore2DataStore3DirectionalSyncs.rb"
 require_relative "DataPortalUI.rb"
 require_relative "DeskOperator.rb"
 require_relative "DirectManagement.rb"
-require_relative "DoNotShowUntil.rb"
-#    DoNotShowUntil::setUnixtime(uid, unixtime)
-#    DoNotShowUntil::isVisible(uid)
+
 require_relative "DisplayUtils.rb"
 
 require_relative "EstateServices.rb"
@@ -118,8 +114,6 @@ require_relative "Runner.rb"
 require_relative "SectionsType0141.rb"
 
 require_relative "VideoStream.rb"
-
-require_relative "Waves.rb"
 
 # ------------------------------------------------------------
 

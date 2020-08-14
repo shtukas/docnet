@@ -6,7 +6,6 @@ class NyxPrimaryObjects
     def self.nyxNxSets()
         # Duplicated in NyxSets
         [
-            "7deb0315-98b5-4e4d-9ad2-d83c2f62e6d4", # Waves
             "0f555c97-3843-4dfe-80c8-714d837eba69", # NSDataPoint
             "ab01a47c-bb91-4a15-93f5-b98cd3eb1866", # Text
             "d83a3ff5-023e-482c-8658-f7cfdbb6b738", # Arrow
