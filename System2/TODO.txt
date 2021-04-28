@@ -1,0 +1,2 @@
+[] At come point I might need a quick Ruby implentation using the existing Aion Point library to get started.
+[] Find a Go terminal search library
