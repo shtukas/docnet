@@ -6,7 +6,7 @@ DocNet is:
 
 - Individual pieces of DocNet are organised as a **semantic network**.
 
-- A self validating, conflict free, distributed **file system**. (In particular, edits made by one user are distributed to all other users seamlesly.)  
+- A self validating, conflict free, distributed **file system**. In particular, edits made by one user are distributed to all other users seamlesly. One particularly interesting feature of the DocNet file system is that it is possible to access it as it was at any point in the past, since all its intermediary states are conserved (thereby behaving a bit like a git repository).
 
 DocNet comes with a: 
 
@@ -23,9 +23,9 @@ DocNet was made for:
 
 DocNet was made because:
 
-- I grew sick and tired of the fact that we never invested into a documentation framework that allows new and existing employes to find doumentation (instead of relying on individual memories and fragment of conversations on Chat)
+- I grew sick and tired of the fact that we never invested into a documentation framework that allows new and existing employes to find general engineering documentation, beyond what is related to source code, instead of relying on individual memories and fragment of conversations on Chat.
 
 DocNet was born:
 
-- During the 2020 first cononavirus lockdown as a proof of concept written in Ruby (at that point the first version of the distrbuted file system was active), but real work (and notably the beginning of the Go implementation) started at the end of April 2021. That having been said, the underling technical ideas have existed for much longer in [Catalyst](https://github.com/shtukas/catalyst) and [Nyx](https://github.com/shtukas/nyx), two of Pascal's personal tools.
+- During the 2020 first cononavirus lockdown as a proof of concept written in Ruby (at that point the first version of the distributed file system was active), but real work (and notably the beginning of the Go implementation) started at the end of April 2021. That having been said, the underling technical ideas have existed for much longer in [Catalyst](https://github.com/shtukas/catalyst) and [Nyx](https://github.com/shtukas/nyx), two of Pascal's personal tools, but ultimately originate from Camlistore, which is now known as [Perkeep](https://perkeep.org).
 
