@@ -23,7 +23,7 @@ DocNet was made for:
 
 DocNet was made because:
 
-- I grew sick and tired of the fact that we never invested into a documentation framework that allows new and existing employes to find doumentation (instead of relying on individual memories and fragment of conversations on Chat)
+- I grew sick and tired of the fact that we never invested into a documentation framework that allows new and existing employes to find documentation (instead of relying on individual memories and fragment of conversations on Chat)
 
 DocNet was born:
 
