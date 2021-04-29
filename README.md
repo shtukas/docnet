@@ -6,7 +6,7 @@ DocNet is:
 
 - Individual pieces of DocNet are organised as a **semantic network**.
 
-- A self validating, conflict free, distributed **file system**. (In particular, edits made by one user are distributed to all other users seamlesly.)  
+- A self validating, conflict free, distributed **file system**. In particular, edits made by one user are distributed to all other users seamlesly. One particularly interesting feature of the DocNet file system is that it is possible to access it as it was at any point in the past, since all its intermediary states are conserved (thereby behaving a bit like a git repository).
 
 DocNet comes with a: 
 
