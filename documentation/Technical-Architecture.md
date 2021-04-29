@@ -8,7 +8,7 @@ DocNet's raw data is stored as content-addressed datablobs. The naming scheme fo
     <namedHash>.data
     <namedHash>.object
 
-The `.data` files are binary files and the `.object` files are JSON serialization of the DocNet network data (eg: nodes, links, arrows, and other metadata). The most important aspect of those files is that they are immutable. We name then after the hash of their contents as a way to make possible to prove the integrity of any collection of files.
+The `.data` files are binary files and the `.object` files are JSON serialization of the DocNet network data (eg: nodes, links, arrows, and other metadata). The most important aspect of those files is that they are immutable. We name them after the hash of their contents as a way to make possible to prove the integrity of any collection of files.
 
 Since file contents and file names are immutable, synchronising two user local data stores is trivial. If Alice wants to synchronize her data store with that of Bob's then she can just give him all the files he doesn't have and she can take from him all the files from his repository that she doesn't have. 
 
