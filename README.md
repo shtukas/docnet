@@ -27,5 +27,5 @@ DocNet was made because:
 
 DocNet was born:
 
-- During the 2020 first cononavirus lockdown as a proof of concept written in Ruby (at that point the first version of the distributed file system was active), but real work (and notably the beginning of the Go implementation) started at the end of April 2021. That having been said, the underling technical ideas have existed for much longer in [Catalyst](https://github.com/shtukas/catalyst) and [Nyx](https://github.com/shtukas/nyx), two of Pascal's personal tools, but eventually originate from Camlistore, which is now known as [Perkeep](https://perkeep.org).
+- During the 2020 first cononavirus lockdown as a proof of concept written in Ruby (at that point the first version of the distributed file system was active), but real work (and notably the beginning of the Go implementation) started at the end of April 2021. That having been said, the underling technical ideas have existed for much longer in [Catalyst](https://github.com/shtukas/catalyst) and [Nyx](https://github.com/shtukas/nyx), two of Pascal's personal tools, but ultimately originate from Camlistore, which is now known as [Perkeep](https://perkeep.org).
 
