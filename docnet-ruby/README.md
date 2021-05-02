@@ -1,0 +1,1 @@
+docnet-ruby is a primilary implementation of the (new) DocNet in Ruby to bootstrap the data repository.
