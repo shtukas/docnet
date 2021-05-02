@@ -15,7 +15,7 @@ DocNet comes with a:
 Documentations:
 
 - The [end user manual](documentation/End-User-Manual.md).
-- The [technical architecture](documentation/Technical-Architecture.md) (entry point of the technical documentation).
+- The [technical documentation](documentation/Technical-Portal.md).
 
 DocNet was made for:
 
