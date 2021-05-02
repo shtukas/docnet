@@ -17,3 +17,4 @@ This is the entry point of the DocNet techinal doumentation and related document
 - [A File Structure for the Complex, the Changing and the Indeterminate (Theodor H. Nelson, 1965)](https://andymatuschak.org/files/papers/Nelson1965.pdf)
 - [Camlistore](https://perkeep.org), now known as Perkeep. Notably the two first videos: [Camlistore Intro & Status Update, 2013](https://www.youtube.com/watch?v=yxSzQIwXM1k) and [Camlistore at FOSDEM, 2014](https://www.youtube.com/watch?v=kBCQq5hfsug).
 - The [Hypercore Protocol](https://hypercore-protocol.org).
+- The Interplanetary File System [IPFS](https://ipfs.io).
