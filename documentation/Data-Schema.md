@@ -35,18 +35,15 @@ Data carriers existing in various flavours. Each data carrier has a **payload ty
 
 The payload type is one of the following
 
-- Text 
-- Url
-- File 
-- Directory
+- text 
+- url
+- aion-point
 
 If the type is "Text" then the payload is a named hash, the hash of the blob of text. (This implies that the object itself mutates everytime the text is updated.)
 
 If the Type is "Url" then the payload is a named hash, the hash of the data blob that contains the url. 
 
-If the type is "File" then the payload is the named hash of a tiny JSON object that contains (1) the named hash of the binary contents of the file and (2) the file extension. You will notice that a file doesn't have a filename. That actually wasn't needed.
-
-If the File is "Directory" then the payload is the named hash of an Aion Point. See the documentation for [Aion Points](Aion-Points.md).
+If the type is "AionPoint" then the payload is the named hash of an Aion Point. See the documentation for [Aion Points](Aion-Points.md).
 
 Some readers will notice that DocNet has less payload types than Pascal's Catalyst or Nyx. This is on purpose, as we aim to reduce the list of payload type in DocNet, to help user's mental models. 
 
@@ -57,19 +54,51 @@ Transmutation is the process by which a data carrier changes payload from one mu
 ### Text Schema
 
 ```
-DataCarrierText {
+DataCarrier {
 	"objectId"    : String # UUID
 	"mutationId"  : String # UUID
 	"timeVersion" : Float  # Unixtime with decimal part
 	"objectClass" : "DataCarrier"
 	----------------------
-	"payloadType" : "Text"
+	"payloadType" : "text"
 	"description" : String
 	"payload"     : NamedHash
 }
 ```
 
-The schema for Text nodes, is simple. They are Data Carriers therefore the `objectClass` is set to `"DataCarrier"` and the `payloadType` is set to `"Text"`. The Text specific attributes are the description, which is carried by the object itself and the NamedHash of the blob of text.  
+The schema for Text nodes, is simple. They are Data Carriers therefore the `objectClass` is set to `"DataCarrier"` and the `payloadType` is set to `"text"`. The Text specific attributes are the description, which is carried by the object itself and the NamedHash of the blob of text.  
+
+### Url Schema
+
+```
+DataCarrier {
+	"objectId"    : String # UUID
+	"mutationId"  : String # UUID
+	"timeVersion" : Float  # Unixtime with decimal part
+	"objectClass" : "DataCarrier"
+	----------------------
+	"payloadType" : "url"
+	"description" : String
+	"payload"     : NamedHash
+}
+```
+
+Follows the same logic as the text version. Note that the URL is not embedded into the object itself, but commited to disk as a blob and the DataCarrier carries the NamedHash.
+
+### Aion Point Schema
+
+```
+DataCarrier {
+	"objectId"    : String # UUID
+	"mutationId"  : String # UUID
+	"timeVersion" : Float  # Unixtime with decimal part
+	"objectClass" : "DataCarrier"
+	----------------------
+	"payloadType" : "aion-point"
+	"description" : String
+	"payload"     : NamedHash
+}
+```
 
 ## User Identifiers
 
