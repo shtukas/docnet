@@ -25,6 +25,8 @@ require 'digest/sha1'
 # Digest::SHA256.hexdigest 'message'  
 # Digest::SHA256.file(myFile).hexdigest
 
+require 'colorize'
+
 require_relative "AionCore.rb"
 require_relative "DataCarriers.rb"
 require_relative "DataManager.rb"
