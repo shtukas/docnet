@@ -4,16 +4,18 @@ DocNet data is either binary blobs or JSON objects. The generic form of a DocNet
 
 ```
 {
+	"objectClass" : String
 	"objectId"    : String
 	"mutationId"  : String
 	"timeVersion" : Float
-	"objectClass" : String
 	----------------------
     (other key/value pairs...)
 }
 ```
 
 Objects are immutable, once created they never change. This is true to the point that they are stored with a file name that is the named hash of the JSON serialization of the object.  
+
+The `objectClass` attribute indicates the class or type of the object. 
 
 `objectId` is what remain invariant from one version of an object to another. All versions of the same object carry the same `objectId`. 
 
@@ -24,8 +26,6 @@ The reason why we have a `objectId` and an `mutationId` is because in addition o
 Having all those versions of the same logical object around poses the immediate problem of knowing which version is the current one ? The answer is simple, the one with the highest `timeVersion`. 
 
 `timeVersion` is a decimal number, the unixtime with decimals of the time the object is issued.
-
-The `objectClass` attribute indicates the class or type of the object. 
 
 ## Data Carriers
 
@@ -55,13 +55,13 @@ Transmutation is the process by which a data carrier changes payload from one mu
 
 ```
 DataCarrier {
+	"objectClass" : "DataCarrier"
 	"objectId"    : String # UUID
 	"mutationId"  : String # UUID
 	"timeVersion" : Float  # Unixtime with decimal part
-	"objectClass" : "DataCarrier"
 	----------------------
-	"payloadType" : "text"
 	"description" : String
+	"payloadType" : "text"
 	"payload"     : NamedHash
 }
 ```
@@ -72,13 +72,13 @@ The schema for Text nodes, is simple. They are Data Carriers therefore the `obje
 
 ```
 DataCarrier {
+	"objectClass" : "DataCarrier"
 	"objectId"    : String # UUID
 	"mutationId"  : String # UUID
 	"timeVersion" : Float  # Unixtime with decimal part
-	"objectClass" : "DataCarrier"
 	----------------------
-	"payloadType" : "url"
 	"description" : String
+	"payloadType" : "url"
 	"payload"     : NamedHash
 }
 ```
@@ -89,13 +89,13 @@ Follows the same logic as the text version. Note that the URL is not embedded in
 
 ```
 DataCarrier {
+	"objectClass" : "DataCarrier"
 	"objectId"    : String # UUID
 	"mutationId"  : String # UUID
 	"timeVersion" : Float  # Unixtime with decimal part
-	"objectClass" : "DataCarrier"
 	----------------------
-	"payloadType" : "aion-point"
 	"description" : String
+	"payloadType" : "aion-point"
 	"payload"     : NamedHash
 }
 ```
@@ -108,10 +108,10 @@ A User Identifier is an object of the form
 
 ```
 UserIdentifier {
+	"objectClass" : "UserIdentifier"
 	"objectId"    : String
 	"mutationId"  : String
 	"timeVersion" : Float
-	"objectClass" : "UserIdentifier"
 	----------------------
 	"docNetMembership" : DocNetUserMembershipCard
 }
@@ -139,10 +139,10 @@ Having defined User Identifiers we can introduce a general object that is used t
 
 ```
 AuthorshipClaim {
+	"objectClass" : "AuthorshipClaim"
 	"objectId"    : String
 	"mutationId"  : String
 	"timeVersion" : Float
-	"objectClass" : "AuthorshipClaim"
 	----------------------
 	"type"        : "User->DataCarrier"
 	"source"      : UserIdentifier's objectId
