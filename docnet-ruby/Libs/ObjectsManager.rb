@@ -13,6 +13,45 @@ class ObjectsManager
             objects
         }
     end
+
+    # ObjectsManager::isDataCarrier(object)
+    def self.isDataCarrier(object)
+        return object["objectClass"] == "DataCarrier"
+    end
+
+    # ObjectsManager::toString(object)
+    def self.toString(object)
+        if ObjectsManager::isDataCarrier(object) then
+            return DataCarriers::toString(object)
+        end
+        return "toString: #{JSON.generate(object)}"
+    end
+
+    # ObjectsManager::selectOneDocNetObjectOrNull()
+    def self.selectOneDocNetObjectOrNull()
+        LucilleCore::selectEntityFromListOfEntitiesOrNull("docnet object", ObjectsManager::docNetObjects(), lambda{ |object| ObjectsManager::toString(object) })
+    end
+
+    # ObjectsManager::landing(object)
+    def self.landing(object)
+
+        if ObjectsManager::isDataCarrier(object) then
+            DataCarriers::landing(object)
+            return
+        end
+
+        loop {
+            system("clear")
+            puts DataCarriers::toString(object)
+            mx = LCoreMenuItemsNX1.new()
+            mx.item("see json object".yellow, lambda { 
+                puts JSON.pretty_generate(object)
+                LucilleCore::pressEnterToContinue()
+            })
+            status = mx.promptAndRunSandbox()
+            break if !status
+        }
+    end
 end
 
 class ObjectsFsck

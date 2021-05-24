@@ -39,11 +39,11 @@ The payload type is one of the following
 - url
 - aion-point
 
-If the type is "Text" then the payload is a named hash, the hash of the blob of text. (This implies that the object itself mutates everytime the text is updated.)
+If the type is "text" then the payload is a named hash, the hash of the blob of text. (This implies that the object itself mutates everytime the text is updated.)
 
-If the Type is "Url" then the payload is a named hash, the hash of the data blob that contains the url. 
+If the Type is "url" then the payload is a named hash, the hash of the data blob that contains the url. 
 
-If the type is "AionPoint" then the payload is the named hash of an Aion Point. See the documentation for [Aion Points](Aion-Points.md).
+If the type is "aion-point" then the payload is the named hash of an Aion Point. See the documentation for [Aion Points](Aion-Points.md).
 
 Some readers will notice that DocNet has less payload types than Pascal's Catalyst or Nyx. This is on purpose, as we aim to reduce the list of payload type in DocNet, to help user's mental models. 
 
