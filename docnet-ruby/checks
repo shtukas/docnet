@@ -79,7 +79,7 @@ else
     exit
 end
 
-objectsManagerObjects = ObjectsManager::collectDocNetObjects()
+objectsManagerObjects = ObjectsManager::docNetObjects()
 
 if objectsManagerObjects.size < dataManagerObjects.size then
     puts "- ObjectsManager Check 1 ☑️"

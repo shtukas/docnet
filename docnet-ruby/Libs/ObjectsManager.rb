@@ -3,8 +3,8 @@
 
 class ObjectsManager
       
-    # ObjectsManager::collectDocNetObjects()
-    def self.collectDocNetObjects()
+    # ObjectsManager::docNetObjects()
+    def self.docNetObjects()
         DataManager::enumerateObjectsFromDisk().reduce([]){|objects, object|
             isNewObjectOrNewerVersion = objects.none?{|o| o["objectId"] == object["objectId"] and o["timeVersion"] >= object["timeVersion"] } 
             if isNewObjectOrNewerVersion then
@@ -18,7 +18,7 @@ end
 class ObjectsFsck
     # ObjectsFsck::fsck()
     def self.fsck()
-        ObjectsManager::collectDocNetObjects().each{|object|
+        ObjectsManager::docNetObjects().each{|object|
             ObjectsFsck::fsckObject(object)
         }
         puts "All good!".green
