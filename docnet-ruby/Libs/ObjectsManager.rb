@@ -13,23 +13,25 @@ class ObjectsManager
             objects
         }
     end
+end
 
-    # ObjectsManager::fsck()
+class ObjectsFsck
+    # ObjectsFsck::fsck()
     def self.fsck()
         ObjectsManager::collectDocNetObjects().each{|object|
-            ObjectsManager::fsckObject(object)
+            ObjectsFsck::fsckObject(object)
         }
         puts "All good!".green
     end
 
-    # ObjectsManager::fsckReportObjectWithProblem(object, message)
+    # ObjectsFsck::fsckReportObjectWithProblem(object, message)
     def self.fsckReportObjectWithProblem(object, message)
         puts JSON.pretty_generate(object)
         puts "[fsck fail] #{message}".red
         exit
     end
 
-    # ObjectsManager::fsckObject(object)
+    # ObjectsFsck::fsckObject(object)
     def self.fsckObject(object)
         # For the moment (13th May) we only cover the DataCarriers as they are the only objects we have in store.
 
@@ -38,14 +40,14 @@ class ObjectsManager
         if object["objectClass"] == "DataCarrier" and object["payloadType"] == "text" then
             text = DataManager::getBlobOrNull(object["payload"])
             if text.nil? then
-                ObjectsManager::fsckReportObjectWithProblem(object, "Could not find payload datablob")
+                ObjectsFsck::fsckReportObjectWithProblem(object, "Could not find payload datablob")
             end
         end
 
         if object["objectClass"] == "DataCarrier" and object["payloadType"] == "url" then
             text = DataManager::getBlobOrNull(object["payload"])
             if text.nil? then
-                ObjectsManager::fsckReportObjectWithProblem(object, "Could not find payload datablob")
+                ObjectsFsck::fsckReportObjectWithProblem(object, "Could not find payload datablob")
             end
         end
 
@@ -53,7 +55,7 @@ class ObjectsManager
             nhash = object["payload"]
             status = AionFsck::structureCheckAionHash(Elizabeth.new(), nhash)
             if !status then
-                ObjectsManager::fsckReportObjectWithProblem(object, "Could not validate Aion Point")
+                ObjectsFsck::fsckReportObjectWithProblem(object, "Could not validate Aion Point")
             end
         end
     end
