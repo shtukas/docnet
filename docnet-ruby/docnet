@@ -12,5 +12,13 @@ if ARGV[0] == "make" and ARGV[1] == "datacarrier" then
     exit
 end
 
+if ARGV[0] == "enumerate-objects-from-disk" then
+    DataManager::enumerateObjectsFromDisk().each{|object|
+        puts JSON.pretty_generate(object)
+    }
+    exit
+end
+
 puts "usage:"
 puts "    docnet make datacarrier"
+puts "    docnet enumerate-objects-from-disk"

@@ -88,5 +88,4 @@ class DataCarriers
             return DataCarriers::issueAionPoint(description, location)
         end
     end
-
 end
