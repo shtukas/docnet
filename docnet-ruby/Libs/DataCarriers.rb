@@ -114,16 +114,21 @@ class DataCarriers
     # DataCarriers::landing(object)
     def self.landing(object)
         raise "6ca466b8-59d7-4811-9b9a-408390daa4d2: #{object}" if object["objectClass"] != "DataCarrier"
+
         loop {
             system("clear")
             puts DataCarriers::toString(object)
-            mx = LCoreMenuItemsNX1.new()
-            mx.item("see json object".yellow, lambda { 
+
+            puts "json object".yellow
+
+            command = LucilleCore::askQuestionAnswerAsString("> ")
+
+            break if command == ""
+
+            if Interpreting::match("json object", command) then
                 puts JSON.pretty_generate(object)
                 LucilleCore::pressEnterToContinue()
-            })
-            status = mx.promptAndRunSandbox()
-            break if !status
+            end
         }
     end
 end

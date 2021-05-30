@@ -30,5 +30,6 @@ require 'colorize'
 require_relative "AionCore.rb"
 require_relative "DataCarriers.rb"
 require_relative "DataManager.rb"
+require_relative "Interpreting.rb"
 require_relative "LucilleCore.rb"
 require_relative "ObjectsManager.rb"

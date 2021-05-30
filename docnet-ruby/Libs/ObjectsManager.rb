@@ -42,14 +42,18 @@ class ObjectsManager
 
         loop {
             system("clear")
-            puts DataCarriers::toString(object)
-            mx = LCoreMenuItemsNX1.new()
-            mx.item("see json object".yellow, lambda { 
+            puts ObjectsManager::toString(object)
+
+            puts "json object".yellow
+
+            command = LucilleCore::askQuestionAnswerAsString("> ")
+
+            break if command == ""
+
+            if Interpreting::match("json object", command) then
                 puts JSON.pretty_generate(object)
                 LucilleCore::pressEnterToContinue()
-            })
-            status = mx.promptAndRunSandbox()
-            break if !status
+            end
         }
     end
 end
