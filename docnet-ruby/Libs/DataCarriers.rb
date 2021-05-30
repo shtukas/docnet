@@ -95,6 +95,11 @@ class DataCarriers
     # -------------------------------------------------------------
     # Operations
 
+    # DataCarriers::objectIsDataCarrier(object): Boolean
+    def self.objectIsDataCarrier(object)
+        object["objectClass"] == "DataCarrier"
+    end
+
     # DataCarriers::dataCarriers(): Array[DataCarrier]
     def self.dataCarriers()
         ObjectsManager::docNetObjects().select{|object| object["objectClass"] == "DataCarrier" }
@@ -111,19 +116,130 @@ class DataCarriers
         LucilleCore::selectEntityFromListOfEntitiesOrNull("data carrier", DataCarriers::dataCarriers(), lambda{ |object| DataCarriers::toString(object) })
     end
 
+    # DataCarriers::access(object)
+    def self.access(object)
+
+        raise "8bf1ae2c-5386-460b-9f6f-067e83910ea0: #{object}" if !DataCarriers::objectIsDataCarrier(object)
+
+        if object["payloadType"] == "text" then
+            text = DataManager::getBlobOrNull(object["payload"])
+            puts text
+            LucilleCore::pressEnterToContinue()
+            return
+        end
+
+        if object["payloadType"] == "url" then
+            url = DataManager::getBlobOrNull(object["payload"])
+            puts url
+            system("open '#{url}'")
+            LucilleCore::pressEnterToContinue()
+            return
+        end
+
+        if object["payloadType"] == "aion-point" then
+            nhash = object["payload"]
+            targetReconstructionFolderpath = "/Users/pascal/Desktop" # TODO: un-hardcode this
+            AionCore::exportHashAtFolder(Elizabeth.new(), nhash, targetReconstructionFolderpath)
+            puts "Export completed"
+            LucilleCore::pressEnterToContinue()
+            return
+        end
+
+        raise "40a20579-82f7-4b13-81ad-0db111b2c65e: #{object}"
+
+    end
+
+    # DataCarriers::edit(object): object
+    def self.edit(object)
+
+        raise "725ece68-e4d4-46a2-9449-c8be73b3de92: #{object}" if !DataCarriers::objectIsDataCarrier(object)
+
+        if object["payloadType"] == "text" then
+            nhash = object["payload"]
+            text1 = DataManager::getBlobOrNull(nhash)
+            text2 = LucilleCore::editTextSynchronously(text1)
+
+            if text1 == text2 then
+                return object
+            end
+
+            object["payload"] = DataManager::putBlob(text2)
+
+            # We need to make some paperwork and return an updated object
+            object["mutationId"] = SecureRandom.uuid
+            object["timeVersion"] = Time.new.to_f
+            DataManager::commitObjectoDisk(object)
+
+            return object
+        end
+
+        if object["payloadType"] == "url" then
+            nhash = object["payload"]
+            text1 = DataManager::getBlobOrNull(nhash)
+            text2 = LucilleCore::editTextSynchronously(text1)
+
+            if text1 == text2 then
+                return object
+            end
+
+            object["payload"] = DataManager::putBlob(text2)
+
+            # We need to make some paperwork and return an updated object
+            object["mutationId"] = SecureRandom.uuid
+            object["timeVersion"] = Time.new.to_f
+            DataManager::commitObjectoDisk(object)
+
+            return object
+        end
+
+        if object["payloadType"] == "aion-point" then
+            nhash = object["payload"]
+            targetReconstructionFolderpath = "/Users/pascal/Desktop" # TODO: un-hardcode this
+            AionCore::exportHashAtFolder(Elizabeth.new(), nhash, targetReconstructionFolderpath)
+            puts "Export completed. Edit the file/directory and press enter for the upload process"
+            LucilleCore::pressEnterToContinue()
+
+            filename = LucilleCore::askQuestionAnswerAsString("filename on Desktop (empty to abort): ")
+            return object if filename == ""
+            location = "/Users/pascal/Desktop/#{filename}"
+            return object if !File.exists?(location)
+
+            nhash = AionCore::commitLocationReturnHash(Elizabeth.new(), location)
+            object["payload"] = nhash
+
+            # We need to make some paperwork and return an updated object
+            object["mutationId"] = SecureRandom.uuid
+            object["timeVersion"] = Time.new.to_f
+            DataManager::commitObjectoDisk(object)
+
+            return object
+        end
+
+        raise "74e79411-c613-401e-baf6-f7a140a162ea: #{object}"
+    end
+
     # DataCarriers::landing(object)
     def self.landing(object)
-        raise "6ca466b8-59d7-4811-9b9a-408390daa4d2: #{object}" if object["objectClass"] != "DataCarrier"
+        raise "6ca466b8-59d7-4811-9b9a-408390daa4d2: #{object}" if !DataCarriers::objectIsDataCarrier(object)
 
         loop {
             system("clear")
             puts DataCarriers::toString(object)
 
-            puts "json object".yellow
+            puts "access | edit | json object".yellow
 
             command = LucilleCore::askQuestionAnswerAsString("> ")
 
             break if command == ""
+
+            if Interpreting::match("access", command) then
+                DataCarriers::access(object)
+            end
+
+
+            if Interpreting::match("edit", command) then
+                DataCarriers::edit(object)
+            end
 
             if Interpreting::match("json object", command) then
                 puts JSON.pretty_generate(object)

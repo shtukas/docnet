@@ -1,0 +1,70 @@
+{
+    "objectClass" : String
+    "objectId"    : String
+    "mutationId"  : String
+    "timeVersion" : Float
+
+    (other key/value pairs...)
+}
+
+DataCarrier {
+    "objectClass" : "DataCarrier"
+    "objectId"    : String # UUID
+    "mutationId"  : String # UUID
+    "timeVersion" : Float  # Unixtime with decimal part
+
+    "description" : String
+    "payloadType" : "text"
+    "payload"     : NamedHash
+}
+
+DataCarrier {
+    "objectClass" : "DataCarrier"
+    "objectId"    : String # UUID
+    "mutationId"  : String # UUID
+    "timeVersion" : Float  # Unixtime with decimal part
+
+    "description" : String
+    "payloadType" : "url"
+    "payload"     : NamedHash
+}
+
+DataCarrier {
+    "objectClass" : "DataCarrier"
+    "objectId"    : String # UUID
+    "mutationId"  : String # UUID
+    "timeVersion" : Float  # Unixtime with decimal part
+
+    "description" : String
+    "payloadType" : "aion-point"
+    "payload"     : NamedHash
+}
+
+UserIdentifier {
+    "objectClass" : "UserIdentifier"
+    "objectId"    : String
+    "mutationId"  : String
+    "timeVersion" : Float
+
+    "docNetMembership" : DocNetUserMembershipCard
+}
+
+DocNetUserMembershipCard { 
+    "version"       : 1
+    "name"          : String
+    "accessLevel"   : String # "ReadOnly" / "ReadWrite" / "Curator"
+    "declaration"   : String
+    "challenge"     : String
+    "authorization" : String
+}
+
+AuthorshipClaim {
+    "objectClass" : "AuthorshipClaim"
+    "objectId"    : String
+    "mutationId"  : String
+    "timeVersion" : Float
+
+    "type"        : "User->DataCarrier"
+    "source"      : UserIdentifier's objectId
+    "target"      : DataCarrier's mutationId 
+}

@@ -5,13 +5,21 @@ class ObjectsManager
       
     # ObjectsManager::docNetObjects()
     def self.docNetObjects()
-        DataManager::enumerateObjectsFromDisk().reduce([]){|objects, object|
-            isNewObjectOrNewerVersion = objects.none?{|o| o["objectId"] == object["objectId"] and o["timeVersion"] >= object["timeVersion"] } 
-            if isNewObjectOrNewerVersion then
-                objects << object
+        mapping = DataManager::enumerateObjectsFromDisk().reduce({}){|mapping, object|
+
+            if mapping[object["objectId"]].nil? then
+                # We do not have any version of this already in the map
+                mapping[object["objectId"]] = object
+            else
+                # We do have an object witht the same objectId in the map, we compare the timeVersions
+                if mapping[object["objectId"]]["timeVersion"] < object["timeVersion"] then
+                    mapping[object["objectId"]] = object
+                end
             end
-            objects
+
+            mapping
         }
+        mapping.values
     end
 
     # ObjectsManager::isDataCarrier(object)
