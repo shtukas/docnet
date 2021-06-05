@@ -74,11 +74,6 @@ class LucilleCore
         end
     end
 
-    # LucilleCore::isOnPower()
-    def self.isOnPower()
-        `/Users/pascal/Galaxy/LucilleOS/Binaries/isOnPower`.strip == "true"
-    end
-
     # ------------------------------------------------------------------
     # FILE SYSTEM UTILS
 

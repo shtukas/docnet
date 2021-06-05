@@ -86,7 +86,7 @@ class DataCarriers
         if type == "aion-point" then
             filename = LucilleCore::askQuestionAnswerAsString("filename on Desktop (empty to abort): ")
             return nil if filename == ""
-            location = "/Users/pascal/Desktop/#{filename}"
+            location = "#{Dir.home()}/Desktop/#{filename}"
             return nil if !File.exists?(location)
             return DataCarriers::issueAionPoint(description, location)
         end
@@ -138,7 +138,7 @@ class DataCarriers
 
         if object["payloadType"] == "aion-point" then
             nhash = object["payload"]
-            targetReconstructionFolderpath = "/Users/pascal/Desktop" # TODO: un-hardcode this
+            targetReconstructionFolderpath = "#{Dir.home()}/Desktop"
             AionCore::exportHashAtFolder(Elizabeth.new(), nhash, targetReconstructionFolderpath)
             puts "Export completed"
             LucilleCore::pressEnterToContinue()
@@ -194,14 +194,14 @@ class DataCarriers
 
         if object["payloadType"] == "aion-point" then
             nhash = object["payload"]
-            targetReconstructionFolderpath = "/Users/pascal/Desktop" # TODO: un-hardcode this
+            targetReconstructionFolderpath = "#{Dir.home()}/Desktop"
             AionCore::exportHashAtFolder(Elizabeth.new(), nhash, targetReconstructionFolderpath)
             puts "Export completed. Edit the file/directory and press enter for the upload process"
             LucilleCore::pressEnterToContinue()
 
             filename = LucilleCore::askQuestionAnswerAsString("filename on Desktop (empty to abort): ")
             return object if filename == ""
-            location = "/Users/pascal/Desktop/#{filename}"
+            location = "#{Dir.home()}/Desktop/#{filename}"
             return object if !File.exists?(location)
 
             nhash = AionCore::commitLocationReturnHash(Elizabeth.new(), location)
