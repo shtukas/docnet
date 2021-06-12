@@ -8,7 +8,6 @@ This is the entry point of the DocNet techinal doumentation and related document
 - [Raw Data Storage](RawDataStorage.md)
 - [Data Schema](Data-Schema.md) 
 - [Data Manager](Data-Manager.md)
-- [UI Library](UI-Library.md)
 - [Transmutation](Transmutation.md)
 - [Fsck](Fsck.md)
 
