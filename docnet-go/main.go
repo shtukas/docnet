@@ -5,6 +5,32 @@ import (
 	"github.com/rivo/tview" // https://pkg.go.dev/github.com/rivo/tview
 )
 
+type DisplayConfiguration struct {
+	application  *tview.Application
+	grid         *tview.Grid
+	mainElement  tview.Primitive
+	commandField tview.Primitive
+	focus        tview.Primitive
+}
+
+func makeListFromStrings(displayConfig DisplayConfiguration) *tview.List {
+	list := tview.NewList().
+		ShowSecondaryText(false).
+		AddItem("List item 1", "", 0, func() {
+			displayConfig.application.SetFocus(displayConfig.commandField)
+		}).
+		AddItem("List item 2", "", 0, func() {
+			displayConfig.application.SetFocus(displayConfig.commandField)
+		}).
+		AddItem("List item 3", "", 0, func() {
+			displayConfig.application.SetFocus(displayConfig.commandField)
+		}).
+		AddItem("List item 4", "", 0, func() {
+			displayConfig.application.SetFocus(displayConfig.commandField)
+		})
+	return list
+}
+
 func updateGridContents(grid *tview.Grid, mainElement tview.Primitive, commandField tview.Primitive) {
 	grid.
 		Clear().
@@ -15,26 +41,45 @@ func updateGridContents(grid *tview.Grid, mainElement tview.Primitive, commandFi
 		AddItem(commandField, 1, 0, 1, 1, 0, 0, true)
 }
 
+func renderDisplayConfiguration(displayConfig DisplayConfiguration) {
+	displayConfig.grid.
+		Clear().
+		SetRows(-1, 1).
+		SetColumns(-1).
+		SetBorders(true).
+		AddItem(displayConfig.mainElement, 0, 0, 1, 1, 0, 0, false).
+		AddItem(displayConfig.commandField, 1, 0, 1, 1, 0, 0, true)
+	displayConfig.application.SetFocus(displayConfig.focus)
+}
+
+func makeTextViewFromStrings(strs []string, selectedLineNumber int) *tview.TextView {
+	// text := strings.Join(strs[:], "\n")
+
+	text := ""
+	for i, v := range strs {
+		separator := "\n"
+		if i == 0 {
+			separator = ""
+		}
+		if i == selectedLineNumber {
+			v = "[green:#808080:b]" + v + " (this one) [-:-:-]"
+		}
+		text = text + separator + v
+	}
+
+	return tview.NewTextView().
+		SetDynamicColors(true).
+		SetTextAlign(tview.AlignLeft).
+		SetText(text)
+}
+
 func main() {
 
 	app := tview.NewApplication()
-
 	grid := tview.NewGrid()
-
-	textView := tview.NewTextView().
-		SetTextAlign(tview.AlignLeft).
-		SetText("Hello World")
-
-	list := tview.NewList().
-		AddItem("List item 1", "Some explanatory text", 'a', nil).
-		AddItem("List item 2", "Some explanatory text", 'b', nil).
-		AddItem("List item 3", "Some explanatory text", 'c', nil).
-		AddItem("List item 4", "Some explanatory text", 'd', nil).
-		AddItem("Quit", "Press to exit", 'q', func() {
-			app.Stop()
-		})
-
+	textView1 := makeTextViewFromStrings([]string{"Hello World"}, -1)
 	commandField := tview.NewInputField()
+	displayConfig := DisplayConfiguration{app, grid, textView1, commandField, commandField}
 
 	commandField.
 		SetLabel("> ").
@@ -46,19 +91,28 @@ func main() {
 				return
 			}
 			if text == "list" {
-				updateGridContents(grid, list, commandField)
+				list := makeListFromStrings(displayConfig)
+				displayConfig.mainElement = list
+				displayConfig.focus = list
+				renderDisplayConfiguration(displayConfig)
 				return
 			}
-			updateGridContents(grid, textView, commandField)
-			textView.SetText(text)
+			textView1.SetText(text)
+			displayConfig.mainElement = textView1
+			displayConfig.focus = commandField
+			renderDisplayConfiguration(displayConfig)
 		}).
 		SetDoneFunc(func(key tcell.Key) {
 
 		})
 
-	updateGridContents(grid, textView, commandField)
+	renderDisplayConfiguration(displayConfig)
 
-	if err := app.SetRoot(grid, true).SetFocus(grid).Run(); err != nil {
+	app.
+		SetRoot(grid, true).
+		SetFocus(grid)
+
+	if err := app.Run(); err != nil {
 		panic(err)
 	}
 }
