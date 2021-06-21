@@ -139,6 +139,15 @@ class DataCarriers
         if object["payloadType"] == "aion-point" then
             nhash = object["payload"]
             targetReconstructionFolderpath = "#{Dir.home()}/Desktop"
+
+            object = AionCore::getAionObjectByHash(Elizabeth.new(), nhash)
+            location = "#{targetReconstructionFolderpath}/#{object["name"]}"
+            if File.exists?(location) then
+                puts "Cannot export nhash: '#{nhash}' at '#{location}' because file is already on Desktop"
+                LucilleCore::pressEnterToContinue()
+                return
+            end
+
             AionCore::exportHashAtFolder(Elizabeth.new(), nhash, targetReconstructionFolderpath)
             puts "Export completed"
             LucilleCore::pressEnterToContinue()
@@ -195,9 +204,14 @@ class DataCarriers
         if object["payloadType"] == "aion-point" then
             nhash = object["payload"]
             targetReconstructionFolderpath = "#{Dir.home()}/Desktop"
-            AionCore::exportHashAtFolder(Elizabeth.new(), nhash, targetReconstructionFolderpath)
-            puts "Export completed. Edit the file/directory and press enter for the upload process"
-            LucilleCore::pressEnterToContinue()
+
+            object = AionCore::getAionObjectByHash(Elizabeth.new(), nhash)
+            location = "#{targetReconstructionFolderpath}/#{object["name"]}"
+            if !File.exists?(location) then
+                AionCore::exportHashAtFolder(Elizabeth.new(), nhash, targetReconstructionFolderpath)
+                puts "Export completed. Edit the file/directory and press enter for the upload process"
+                LucilleCore::pressEnterToContinue()
+            end
 
             filename = LucilleCore::askQuestionAnswerAsString("filename on Desktop (empty to abort): ")
             return object if filename == ""
