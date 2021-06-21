@@ -31,16 +31,6 @@ func makeListFromStrings(displayConfig DisplayConfiguration) *tview.List {
 	return list
 }
 
-func updateGridContents(grid *tview.Grid, mainElement tview.Primitive, commandField tview.Primitive) {
-	grid.
-		Clear().
-		SetRows(-1, 1).
-		SetColumns(-1).
-		SetBorders(true).
-		AddItem(mainElement, 0, 0, 1, 1, 0, 0, false).
-		AddItem(commandField, 1, 0, 1, 1, 0, 0, true)
-}
-
 func renderDisplayConfiguration(displayConfig DisplayConfiguration) {
 	displayConfig.grid.
 		Clear().
