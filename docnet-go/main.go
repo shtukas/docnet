@@ -5,41 +5,38 @@ import (
 	"github.com/rivo/tview" // https://pkg.go.dev/github.com/rivo/tview
 )
 
-type DisplayConfiguration struct {
-	application  *tview.Application
-	grid         *tview.Grid
-	mainElement  tview.Primitive
-	commandField tview.Primitive
-	focus        tview.Primitive
-}
-
-func makeListFromStrings(displayConfig DisplayConfiguration) *tview.List {
+func makeListFromStringsWithInputFieldEcho(application *tview.Application, inputField *tview.InputField, strs []string) *tview.List {
 	list := tview.NewList().
-		ShowSecondaryText(false).
-		AddItem("List item 1", "", 0, func() {
-			displayConfig.application.SetFocus(displayConfig.commandField)
-		}).
-		AddItem("List item 2", "", 0, func() {
-			displayConfig.application.SetFocus(displayConfig.commandField)
-		}).
-		AddItem("List item 3", "", 0, func() {
-			displayConfig.application.SetFocus(displayConfig.commandField)
-		}).
-		AddItem("List item 4", "", 0, func() {
-			displayConfig.application.SetFocus(displayConfig.commandField)
+		ShowSecondaryText(false)
+	for _, str := range strs {
+		list.AddItem(str, "", 0, func() {
+			inputField.SetText(str) // Todo: has no effect
+			application.SetFocus(inputField)
 		})
+	}
 	return list
 }
 
-func renderDisplayConfiguration(displayConfig DisplayConfiguration) {
-	displayConfig.grid.
+func renderScreenText(application *tview.Application, grid *tview.Grid, textView *tview.TextView, commandField *tview.InputField) {
+	grid.
 		Clear().
 		SetRows(-1, 1).
 		SetColumns(-1).
 		SetBorders(true).
-		AddItem(displayConfig.mainElement, 0, 0, 1, 1, 0, 0, false).
-		AddItem(displayConfig.commandField, 1, 0, 1, 1, 0, 0, true)
-	displayConfig.application.SetFocus(displayConfig.focus)
+		AddItem(textView, 0, 0, 1, 1, 0, 0, false).
+		AddItem(commandField, 1, 0, 1, 1, 0, 0, true)
+	application.SetFocus(textView)
+}
+
+func renderScreenList(application *tview.Application, grid *tview.Grid, list *tview.List, commandField *tview.InputField) {
+	grid.
+		Clear().
+		SetRows(-1, 1).
+		SetColumns(-1).
+		SetBorders(true).
+		AddItem(list, 0, 0, 1, 1, 0, 0, false).
+		AddItem(commandField, 1, 0, 1, 1, 0, 0, true)
+	application.SetFocus(list)
 }
 
 func makeTextViewFromStrings(strs []string, selectedLineNumber int) *tview.TextView {
@@ -65,11 +62,16 @@ func makeTextViewFromStrings(strs []string, selectedLineNumber int) *tview.TextV
 
 func main() {
 
-	app := tview.NewApplication()
+	// ----------------------------------------------
+	// Elements
+
+	application := tview.NewApplication()
 	grid := tview.NewGrid()
 	textView1 := makeTextViewFromStrings([]string{"Hello World"}, -1)
 	commandField := tview.NewInputField()
-	displayConfig := DisplayConfiguration{app, grid, textView1, commandField, commandField}
+
+	// ----------------------------------------------
+	// Elements behaviour
 
 	commandField.
 		SetLabel("> ").
@@ -77,32 +79,31 @@ func main() {
 		SetFieldBackgroundColor(tcell.NewHexColor(0)).
 		SetChangedFunc(func(text string) {
 			if text == "exit" {
-				app.Stop()
-				return
+				application.Stop()
 			}
-			if text == "list" {
-				list := makeListFromStrings(displayConfig)
-				displayConfig.mainElement = list
-				displayConfig.focus = list
-				renderDisplayConfiguration(displayConfig)
-				return
-			}
-			textView1.SetText(text)
-			displayConfig.mainElement = textView1
-			displayConfig.focus = commandField
-			renderDisplayConfiguration(displayConfig)
 		}).
 		SetDoneFunc(func(key tcell.Key) {
-
+			text := commandField.GetText()
+			list := makeListFromStringsWithInputFieldEcho(application, commandField, []string{"Pascal", "default", text})
+			renderScreenList(application, grid, list, commandField)
 		})
 
-	renderDisplayConfiguration(displayConfig)
+	// ----------------------------------------------
+	// Initialization
 
-	app.
+	grid.
+		Clear().
+		SetRows(-1, 1).
+		SetColumns(-1).
+		SetBorders(true).
+		AddItem(textView1, 0, 0, 1, 1, 0, 0, false).
+		AddItem(commandField, 1, 0, 1, 1, 0, 0, true)
+
+	application.
 		SetRoot(grid, true).
-		SetFocus(grid)
+		SetFocus(commandField)
 
-	if err := app.Run(); err != nil {
+	if err := application.Run(); err != nil {
 		panic(err)
 	}
 }
