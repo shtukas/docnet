@@ -10,7 +10,7 @@ DocNet is:
 
 DocNet comes with a: 
 
-- **terminal** interface. That said, maniplating collections of files is done the usual way, using the local file system. (There is room for a graphical or web interface in the future.)
+- **terminal** interface. That said, manipulating collections of files is done the usual way, using the local file system. (There is room for a graphical or web interface in the future.)
 
 Documentations:
 
