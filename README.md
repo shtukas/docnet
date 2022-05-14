@@ -1,3 +1,5 @@
+Note on Friday 13th May 2022: If you find this due to a mention in techtime, note that this code is not currently active (Didact is the actively developped code).
+
 **DocNet** (Multi-user **Doc**umentation **Net**work).
 
 DocNet is: 
