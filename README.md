@@ -1,5 +1,3 @@
-Note on Friday 13th May 2022: If you find this due to a mention in techtime, note that this code is not currently active (Didact is the actively developped code).
-
 **DocNet** (Multi-user **Doc**umentation **Net**work).
 
 DocNet is: 
@@ -14,11 +12,6 @@ DocNet comes with a:
 
 - **terminal** interface. That said, manipulating collections of files is done the usual way, using the local file system. (There is room for a graphical or web interface in the future.)
 
-Documentations:
-
-- The [end user manual](documentation/End-User-Manual.md).
-- The [technical documentation](documentation/Technical-Portal.md).
-
 DocNet was made for:
 
 - My amazing engineering colleagues at [the Guardian](https://github.com/guardian). 
@@ -26,8 +19,3 @@ DocNet was made for:
 DocNet was made because:
 
 - I grew sick and tired of the fact that we never invested into a documentation framework that allows new and existing employes to find general engineering documentation, beyond what is related to source code, instead of relying on individual memories and fragment of conversations on Chat.
-
-DocNet was born:
-
-- During the 2020 first cononavirus lockdown as a proof of concept written in Ruby (at that point the first version of the distributed file system was active), but real work (and notably the beginning of the Go implementation) started at the end of April 2021. That having been said, the underling technical ideas have existed for much longer in [Catalyst](https://github.com/shtukas/catalyst) and [Nyx](https://github.com/shtukas/nyx), two of Pascal's personal tools, but ultimately originate from Camlistore, which is now known as [Perkeep](https://perkeep.org).
-
