@@ -1,5 +1,7 @@
 **DocNet** (Multi-user **Doc**umentation **Net**work).
 
+**May 2022**: DocNet is currently being rewritten in Rust
+
 DocNet is: 
 
 - **A documentation framework**. It allows the creation and edition of instances of documentations, without putting any kind of restriction on the files and formats users decide to use (text, .md files, pictures, Word Documents, Powerpoints etc...), as well as acting as a search index for not only its own data but also other source of documenation (for instance existing Google Docs).
