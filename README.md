@@ -1,6 +1,6 @@
 **DocNet** (Multi-user **Doc**umentation **Net**work).
 
-**May 2022**: DocNet is currently being rewritten in Rust
+**June 2022**: DocNet is currently being rewritten in Rust
 
 DocNet is: 
 
