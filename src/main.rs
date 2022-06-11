@@ -78,7 +78,7 @@ fn main() -> io::Result<()> {
     println!("Welcome to DotNet");
     if !ensure_docnet_folder() {
         println!("Could not find or create the docnet folder. Aborting.");
-        exit(0);
+        exit(1);
     }
     Ok(())
 }
