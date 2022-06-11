@@ -74,11 +74,39 @@ fn ask_question_answer_as_boolean(question: &str) -> Result<bool, std::io::Error
     Ok(input.trim() == "yes")
 }
 
+fn databaseLocation() -> &'static str {
+    let path = "/Users/pascal/.docnet/001-objects.sqlite3";
+    path
+}
+
+/*
+create table (_objectuuid_ text, _mikuType_ text, _object_ text);
+*/
+
+fn ensureDatabase() -> Result<bool, Error> {
+    let path = databaseLocation();
+    let exists = Path::new(path).exists();
+    if !exists {
+        // We are going to create a new database
+        let conn = Connection::open(databaseLocation())?;
+        conn.execute(
+            "create table _objects_ (_objectuuid_ text, _mikuType_ text, _object_ text)",
+            [], // empty list of parameters.
+        )?;
+    }
+    Ok(true)
+}
+
 fn main() -> io::Result<()> {
     println!("Welcome to DotNet");
     if !ensure_docnet_folder() {
         println!("Could not find or create the docnet folder. Aborting.");
         exit(1);
+    }
+    let status = ensureDatabase();
+    match status {
+        Ok(flag) => {},
+        Err(error) => {print!("{}", error) }
     }
     Ok(())
 }
