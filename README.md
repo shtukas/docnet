@@ -20,4 +20,4 @@ DocNet was made for:
 
 DocNet was made because:
 
-- I grew sick and tired of the fact that we never invested into a documentation framework that allows new and existing employes to find general engineering documentation, beyond what is related to source code, instead of relying on individual memories and fragment of conversations on Chat.
+- I grew sick and tired of the fact that we never invested into a documentation framework that allows new and existing employees to find general engineering documentation, instead of relying on individual memories and fragment of conversations on Chat.
